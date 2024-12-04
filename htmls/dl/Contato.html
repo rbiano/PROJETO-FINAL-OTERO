@@ -1,0 +1,1848 @@
+<!DOCTYPE html><!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html lang="pt-BR" class="no-js"><!--<![endif]-->
+
+<head>
+	<meta charset="UTF-8">
+	<script>if (navigator.userAgent.match(/MSIE|Internet Explorer/i) || navigator.userAgent.match(/Trident\/7\..*?rv:11/i)) { var href = document.location.href; if (!href.match(/[?&]nowprocket/)) { if (href.indexOf("?") == -1) { if (href.indexOf("#") == -1) { document.location.href = href + "?nowprocket=1" } else { document.location.href = href.replace("#", "?nowprocket=1#") } } else { if (href.indexOf("#") == -1) { document.location.href = href + "&nowprocket=1" } else { document.location.href = href.replace("#", "&nowprocket=1#") } } } }</script>
+	<script>class RocketLazyLoadScripts { constructor(e) { this.triggerEvents = e, this.eventOptions = { passive: !0 }, this.userEventListener = this.triggerListener.bind(this), this.delayedScripts = { normal: [], async: [], defer: [] }, this.allJQueries = [] } _addUserInteractionListener(e) { this.triggerEvents.forEach((t => window.addEventListener(t, e.userEventListener, e.eventOptions))) } _removeUserInteractionListener(e) { this.triggerEvents.forEach((t => window.removeEventListener(t, e.userEventListener, e.eventOptions))) } triggerListener() { this._removeUserInteractionListener(this), "loading" === document.readyState ? document.addEventListener("DOMContentLoaded", this._loadEverythingNow.bind(this)) : this._loadEverythingNow() } async _loadEverythingNow() { this._delayEventListeners(), this._delayJQueryReady(this), this._handleDocumentWrite(), this._registerAllDelayedScripts(), this._preloadAllScripts(), await this._loadScriptsFromList(this.delayedScripts.normal), await this._loadScriptsFromList(this.delayedScripts.defer), await this._loadScriptsFromList(this.delayedScripts.async), await this._triggerDOMContentLoaded(), await this._triggerWindowLoad(), window.dispatchEvent(new Event("rocket-allScriptsLoaded")) } _registerAllDelayedScripts() { document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e => { e.hasAttribute("src") ? e.hasAttribute("async") && !1 !== e.async ? this.delayedScripts.async.push(e) : e.hasAttribute("defer") && !1 !== e.defer || "module" === e.getAttribute("data-rocket-type") ? this.delayedScripts.defer.push(e) : this.delayedScripts.normal.push(e) : this.delayedScripts.normal.push(e) })) } async _transformScript(e) { return await this._requestAnimFrame(), new Promise((t => { const n = document.createElement("script"); let r;[...e.attributes].forEach((e => { let t = e.nodeName; "type" !== t && ("data-rocket-type" === t && (t = "type", r = e.nodeValue), n.setAttribute(t, e.nodeValue)) })), e.hasAttribute("src") ? (n.addEventListener("load", t), n.addEventListener("error", t)) : (n.text = e.text, t()), e.parentNode.replaceChild(n, e) })) } async _loadScriptsFromList(e) { const t = e.shift(); return t ? (await this._transformScript(t), this._loadScriptsFromList(e)) : Promise.resolve() } _preloadAllScripts() { var e = document.createDocumentFragment();[...this.delayedScripts.normal, ...this.delayedScripts.defer, ...this.delayedScripts.async].forEach((t => { const n = t.getAttribute("src"); if (n) { const t = document.createElement("link"); t.href = n, t.rel = "preload", t.as = "script", e.appendChild(t) } })), document.head.appendChild(e) } _delayEventListeners() { let e = {}; function t(t, n) { !function (t) { function n(n) { return e[t].eventsToRewrite.indexOf(n) >= 0 ? "rocket-" + n : n } e[t] || (e[t] = { originalFunctions: { add: t.addEventListener, remove: t.removeEventListener }, eventsToRewrite: [] }, t.addEventListener = function () { arguments[0] = n(arguments[0]), e[t].originalFunctions.add.apply(t, arguments) }, t.removeEventListener = function () { arguments[0] = n(arguments[0]), e[t].originalFunctions.remove.apply(t, arguments) }) }(t), e[t].eventsToRewrite.push(n) } function n(e, t) { let n = e[t]; Object.defineProperty(e, t, { get: () => n || function () { }, set(r) { e["rocket" + t] = n = r } }) } t(document, "DOMContentLoaded"), t(window, "DOMContentLoaded"), t(window, "load"), t(window, "pageshow"), t(document, "readystatechange"), n(document, "onreadystatechange"), n(window, "onload"), n(window, "onpageshow") } _delayJQueryReady(e) { let t = window.jQuery; Object.defineProperty(window, "jQuery", { get: () => t, set(n) { if (n && n.fn && !e.allJQueries.includes(n)) { n.fn.ready = n.fn.init.prototype.ready = function (t) { e.domReadyFired ? t.bind(document)(n) : document.addEventListener("rocket-DOMContentLoaded", (() => t.bind(document)(n))) }; const t = n.fn.on; n.fn.on = n.fn.init.prototype.on = function () { if (this[0] === window) { function e(e) { return e.split(" ").map((e => "load" === e || 0 === e.indexOf("load.") ? "rocket-jquery-load" : e)).join(" ") } "string" == typeof arguments[0] || arguments[0] instanceof String ? arguments[0] = e(arguments[0]) : "object" == typeof arguments[0] && Object.keys(arguments[0]).forEach((t => { delete Object.assign(arguments[0], { [e(t)]: arguments[0][t] })[t] })) } return t.apply(this, arguments), this }, e.allJQueries.push(n) } t = n } }) } async _triggerDOMContentLoaded() { this.domReadyFired = !0, await this._requestAnimFrame(), document.dispatchEvent(new Event("rocket-DOMContentLoaded")), await this._requestAnimFrame(), window.dispatchEvent(new Event("rocket-DOMContentLoaded")), await this._requestAnimFrame(), document.dispatchEvent(new Event("rocket-readystatechange")), await this._requestAnimFrame(), document.rocketonreadystatechange && document.rocketonreadystatechange() } async _triggerWindowLoad() { await this._requestAnimFrame(), window.dispatchEvent(new Event("rocket-load")), await this._requestAnimFrame(), window.rocketonload && window.rocketonload(), await this._requestAnimFrame(), this.allJQueries.forEach((e => e(window).trigger("rocket-jquery-load"))), window.dispatchEvent(new Event("rocket-pageshow")), await this._requestAnimFrame(), window.rocketonpageshow && window.rocketonpageshow() } _handleDocumentWrite() { const e = new Map; document.write = document.writeln = function (t) { const n = document.currentScript, r = document.createRange(), i = n.parentElement; let o = e.get(n); void 0 === o && (o = n.nextSibling, e.set(n, o)); const a = document.createDocumentFragment(); r.setStart(a, 0), a.appendChild(r.createContextualFragment(t)), i.insertBefore(a, o) } } async _requestAnimFrame() { return new Promise((e => requestAnimationFrame(e))) } static run() { const e = new RocketLazyLoadScripts(["keydown", "mousemove", "touchmove", "touchstart", "touchend", "wheel"]); e._addUserInteractionListener(e) } } RocketLazyLoadScripts.run();</script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+	<meta name="theme-color" content="#e67f19">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<title>Contatos – J Marcondes</title>
+	<link rel="preload"
+		href="https://jmarcondes.com.br/wp-content/cache/perfmatters/jmarcondes.com.br/css/page-308.used.css?ver=1713206510"
+		as="style" onload="this.rel='stylesheet';this.removeAttribute('onload');">
+	<link rel="stylesheet" id="perfmatters-used-css"
+		href="../../jmarcondes.com.br/wp-content/cache/perfmatters/jmarcondes.com.br/css/page-308.used_ver%3D1713206510.css"
+		media="all">
+	<meta name="robots" content="max-image-preview:large">
+
+	<link rel="dns-prefetch" href="//maps.googleapis.com">
+	<link rel="dns-prefetch" href="//maps.gstatic.com">
+
+	<link rel="dns-prefetch" href="//ajax.googleapis.com">
+	<link rel="dns-prefetch" href="//apis.google.com">
+	<link rel="dns-prefetch" href="//google-analytics.com">
+	<link rel="dns-prefetch" href="//www.google-analytics.com">
+	<link rel="dns-prefetch" href="//ssl.google-analytics.com">
+	<link rel="dns-prefetch" href="//youtube.com">
+	<link rel="dns-prefetch" href="//api.pinterest.com">
+	<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+	<link rel="dns-prefetch" href="//connect.facebook.net">
+	<link rel="dns-prefetch" href="//platform.twitter.com">
+	<link rel="dns-prefetch" href="//syndication.twitter.com">
+	<link rel="dns-prefetch" href="//platform.instagram.com">
+	<link rel="dns-prefetch" href="//disqus.com">
+	<link rel="dns-prefetch" href="//sitename.disqus.com">
+	<link rel="dns-prefetch" href="//s7.addthis.com">
+	<link rel="dns-prefetch" href="//platform.linkedin.com">
+	<link rel="dns-prefetch" href="//w.sharethis.com">
+	<link rel="dns-prefetch" href="//i0.wp.com">
+	<link rel="dns-prefetch" href="//i1.wp.com">
+	<link rel="dns-prefetch" href="//i2.wp.com">
+	<link rel="dns-prefetch" href="//stats.wp.com">
+	<link rel="dns-prefetch" href="//pixel.wp.com">
+	<link rel="dns-prefetch" href="//s.gravatar.com">
+	<link rel="dns-prefetch" href="//0.gravatar.com">
+	<link rel="dns-prefetch" href="//2.gravatar.com">
+	<link rel="dns-prefetch" href="//1.gravatar.com">
+	<link rel="dns-prefetch" href="//www.googletagmanager.com">
+	<link rel="dns-prefetch" href="//googletagmanager.com">
+	<link rel="alternate" type="application/rss+xml" title="Feed para J  Marcondes »"
+		href="https://jmarcondes.com.br/feed/">
+	<link rel="alternate" type="application/rss+xml" title="Feed de comentários para J  Marcondes »"
+		href="https://jmarcondes.com.br/comments/feed/">
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/jmarcondes.com.br\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.4.3"}};
+/*! This file is auto-generated */
+!function(i,n){var o,s,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),r=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===r[t]})}function u(e,t,n){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\uddfa\ud83c\uddf3","\ud83c\uddfa\u200b\ud83c\uddf3")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!n(e,"\ud83e\udef1\ud83c\udffb\u200d\ud83e\udef2\ud83c\udfff","\ud83e\udef1\ud83c\udffb\u200b\ud83e\udef2\ud83c\udfff")}return!1}function f(e,t,n){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):i.createElement("canvas"),a=r.getContext("2d",{willReadFrequently:!0}),o=(a.textBaseline="top",a.font="600 32px Arial",{});return e.forEach(function(e){o[e]=t(a,e,n)}),o}function t(e){var t=i.createElement("script");t.src=e,t.defer=!0,i.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",s=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){i.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"}),a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=function(e){c(n=e.data),a.terminate(),t(n)})}catch(e){}c(n=f(s,u,p))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+	<style id="wp-emoji-styles-inline-css" type="text/css">
+		img.wp-smiley,
+		img.emoji {
+			display: inline !important;
+			border: none !important;
+			box-shadow: none !important;
+			height: 1em !important;
+			width: 1em !important;
+			margin: 0 0.07em !important;
+			vertical-align: -0.1em !important;
+			background: none !important;
+			padding: 0 !important;
+		}
+	</style>
+	<link rel="stylesheet" id="wp-block-library-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.4.3"
+		type="text/css" media="all">
+	<style id="wp-block-library-theme-inline-css" type="text/css">
+		.wp-block-audio figcaption {
+			color: #555;
+			font-size: 13px;
+			text-align: center
+		}
+
+		.is-dark-theme .wp-block-audio figcaption {
+			color: hsla(0, 0%, 100%, .65)
+		}
+
+		.wp-block-audio {
+			margin: 0 0 1em
+		}
+
+		.wp-block-code {
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			font-family: Menlo, Consolas, monaco, monospace;
+			padding: .8em 1em
+		}
+
+		.wp-block-embed figcaption {
+			color: #555;
+			font-size: 13px;
+			text-align: center
+		}
+
+		.is-dark-theme .wp-block-embed figcaption {
+			color: hsla(0, 0%, 100%, .65)
+		}
+
+		.wp-block-embed {
+			margin: 0 0 1em
+		}
+
+		.blocks-gallery-caption {
+			color: #555;
+			font-size: 13px;
+			text-align: center
+		}
+
+		.is-dark-theme .blocks-gallery-caption {
+			color: hsla(0, 0%, 100%, .65)
+		}
+
+		.wp-block-image figcaption {
+			color: #555;
+			font-size: 13px;
+			text-align: center
+		}
+
+		.is-dark-theme .wp-block-image figcaption {
+			color: hsla(0, 0%, 100%, .65)
+		}
+
+		.wp-block-image {
+			margin: 0 0 1em
+		}
+
+		.wp-block-pullquote {
+			border-bottom: 4px solid;
+			border-top: 4px solid;
+			color: currentColor;
+			margin-bottom: 1.75em
+		}
+
+		.wp-block-pullquote cite,
+		.wp-block-pullquote footer,
+		.wp-block-pullquote__citation {
+			color: currentColor;
+			font-size: .8125em;
+			font-style: normal;
+			text-transform: uppercase
+		}
+
+		.wp-block-quote {
+			border-left: .25em solid;
+			margin: 0 0 1.75em;
+			padding-left: 1em
+		}
+
+		.wp-block-quote cite,
+		.wp-block-quote footer {
+			color: currentColor;
+			font-size: .8125em;
+			font-style: normal;
+			position: relative
+		}
+
+		.wp-block-quote.has-text-align-right {
+			border-left: none;
+			border-right: .25em solid;
+			padding-left: 0;
+			padding-right: 1em
+		}
+
+		.wp-block-quote.has-text-align-center {
+			border: none;
+			padding-left: 0
+		}
+
+		.wp-block-quote.is-large,
+		.wp-block-quote.is-style-large,
+		.wp-block-quote.is-style-plain {
+			border: none
+		}
+
+		.wp-block-search .wp-block-search__label {
+			font-weight: 700
+		}
+
+		.wp-block-search__button {
+			border: 1px solid #ccc;
+			padding: .375em .625em
+		}
+
+		:where(.wp-block-group.has-background) {
+			padding: 1.25em 2.375em
+		}
+
+		.wp-block-separator.has-css-opacity {
+			opacity: .4
+		}
+
+		.wp-block-separator {
+			border: none;
+			border-bottom: 2px solid;
+			margin-left: auto;
+			margin-right: auto
+		}
+
+		.wp-block-separator.has-alpha-channel-opacity {
+			opacity: 1
+		}
+
+		.wp-block-separator:not(.is-style-wide):not(.is-style-dots) {
+			width: 100px
+		}
+
+		.wp-block-separator.has-background:not(.is-style-dots) {
+			border-bottom: none;
+			height: 1px
+		}
+
+		.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots) {
+			height: 2px
+		}
+
+		.wp-block-table {
+			margin: 0 0 1em
+		}
+
+		.wp-block-table td,
+		.wp-block-table th {
+			word-break: normal
+		}
+
+		.wp-block-table figcaption {
+			color: #555;
+			font-size: 13px;
+			text-align: center
+		}
+
+		.is-dark-theme .wp-block-table figcaption {
+			color: hsla(0, 0%, 100%, .65)
+		}
+
+		.wp-block-video figcaption {
+			color: #555;
+			font-size: 13px;
+			text-align: center
+		}
+
+		.is-dark-theme .wp-block-video figcaption {
+			color: hsla(0, 0%, 100%, .65)
+		}
+
+		.wp-block-video {
+			margin: 0 0 1em
+		}
+
+		.wp-block-template-part.has-background {
+			margin-bottom: 0;
+			margin-top: 0;
+			padding: 1.25em 2.375em
+		}
+	</style>
+	<link data-minify="1" rel="stylesheet" id="nta-css-popup-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/cache/min/1/wp-content/plugins/wp-whatsapp/assets/dist/css/style.css?ver=1713195450"
+		type="text/css" media="all">
+	<style id="classic-theme-styles-inline-css" type="text/css">
+		/*! This file is auto-generated */
+		.wp-block-button__link {
+			color: #fff;
+			background-color: #32373c;
+			border-radius: 9999px;
+			box-shadow: none;
+			text-decoration: none;
+			padding: calc(.667em + 2px) calc(1.333em + 2px);
+			font-size: 1.125em
+		}
+
+		.wp-block-file__button {
+			background: #32373c;
+			color: #fff;
+			text-decoration: none
+		}
+	</style>
+	<style id="global-styles-inline-css" type="text/css">
+		body {
+			--wp--preset--color--black: #000000;
+			--wp--preset--color--cyan-bluish-gray: #abb8c3;
+			--wp--preset--color--white: #FFF;
+			--wp--preset--color--pale-pink: #f78da7;
+			--wp--preset--color--vivid-red: #cf2e2e;
+			--wp--preset--color--luminous-vivid-orange: #ff6900;
+			--wp--preset--color--luminous-vivid-amber: #fcb900;
+			--wp--preset--color--light-green-cyan: #7bdcb5;
+			--wp--preset--color--vivid-green-cyan: #00d084;
+			--wp--preset--color--pale-cyan-blue: #8ed1fc;
+			--wp--preset--color--vivid-cyan-blue: #0693e3;
+			--wp--preset--color--vivid-purple: #9b51e0;
+			--wp--preset--color--accent: #e67f19;
+			--wp--preset--color--dark-gray: #111;
+			--wp--preset--color--light-gray: #767676;
+			--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg, rgba(6, 147, 227, 1) 0%, rgb(155, 81, 224) 100%);
+			--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg, rgb(122, 220, 180) 0%, rgb(0, 208, 130) 100%);
+			--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg, rgba(252, 185, 0, 1) 0%, rgba(255, 105, 0, 1) 100%);
+			--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg, rgba(255, 105, 0, 1) 0%, rgb(207, 46, 46) 100%);
+			--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg, rgb(238, 238, 238) 0%, rgb(169, 184, 195) 100%);
+			--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg, rgb(74, 234, 220) 0%, rgb(151, 120, 209) 20%, rgb(207, 42, 186) 40%, rgb(238, 44, 130) 60%, rgb(251, 105, 98) 80%, rgb(254, 248, 76) 100%);
+			--wp--preset--gradient--blush-light-purple: linear-gradient(135deg, rgb(255, 206, 236) 0%, rgb(152, 150, 240) 100%);
+			--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg, rgb(254, 205, 165) 0%, rgb(254, 45, 45) 50%, rgb(107, 0, 62) 100%);
+			--wp--preset--gradient--luminous-dusk: linear-gradient(135deg, rgb(255, 203, 112) 0%, rgb(199, 81, 192) 50%, rgb(65, 88, 208) 100%);
+			--wp--preset--gradient--pale-ocean: linear-gradient(135deg, rgb(255, 245, 203) 0%, rgb(182, 227, 212) 50%, rgb(51, 167, 181) 100%);
+			--wp--preset--gradient--electric-grass: linear-gradient(135deg, rgb(202, 248, 128) 0%, rgb(113, 206, 126) 100%);
+			--wp--preset--gradient--midnight: linear-gradient(135deg, rgb(2, 3, 129) 0%, rgb(40, 116, 252) 100%);
+			--wp--preset--font-size--small: 13px;
+			--wp--preset--font-size--medium: 20px;
+			--wp--preset--font-size--large: 36px;
+			--wp--preset--font-size--x-large: 42px;
+			--wp--preset--spacing--20: 0.44rem;
+			--wp--preset--spacing--30: 0.67rem;
+			--wp--preset--spacing--40: 1rem;
+			--wp--preset--spacing--50: 1.5rem;
+			--wp--preset--spacing--60: 2.25rem;
+			--wp--preset--spacing--70: 3.38rem;
+			--wp--preset--spacing--80: 5.06rem;
+			--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);
+			--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);
+			--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);
+			--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);
+			--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);
+		}
+
+		:where(.is-layout-flex) {
+			gap: 0.5em;
+		}
+
+		:where(.is-layout-grid) {
+			gap: 0.5em;
+		}
+
+		body .is-layout-flow>.alignleft {
+			float: left;
+			margin-inline-start: 0;
+			margin-inline-end: 2em;
+		}
+
+		body .is-layout-flow>.alignright {
+			float: right;
+			margin-inline-start: 2em;
+			margin-inline-end: 0;
+		}
+
+		body .is-layout-flow>.aligncenter {
+			margin-left: auto !important;
+			margin-right: auto !important;
+		}
+
+		body .is-layout-constrained>.alignleft {
+			float: left;
+			margin-inline-start: 0;
+			margin-inline-end: 2em;
+		}
+
+		body .is-layout-constrained>.alignright {
+			float: right;
+			margin-inline-start: 2em;
+			margin-inline-end: 0;
+		}
+
+		body .is-layout-constrained>.aligncenter {
+			margin-left: auto !important;
+			margin-right: auto !important;
+		}
+
+		body .is-layout-constrained> :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+			max-width: var(--wp--style--global--content-size);
+			margin-left: auto !important;
+			margin-right: auto !important;
+		}
+
+		body .is-layout-constrained>.alignwide {
+			max-width: var(--wp--style--global--wide-size);
+		}
+
+		body .is-layout-flex {
+			display: flex;
+		}
+
+		body .is-layout-flex {
+			flex-wrap: wrap;
+			align-items: center;
+		}
+
+		body .is-layout-flex>* {
+			margin: 0;
+		}
+
+		body .is-layout-grid {
+			display: grid;
+		}
+
+		body .is-layout-grid>* {
+			margin: 0;
+		}
+
+		:where(.wp-block-columns.is-layout-flex) {
+			gap: 2em;
+		}
+
+		:where(.wp-block-columns.is-layout-grid) {
+			gap: 2em;
+		}
+
+		:where(.wp-block-post-template.is-layout-flex) {
+			gap: 1.25em;
+		}
+
+		:where(.wp-block-post-template.is-layout-grid) {
+			gap: 1.25em;
+		}
+
+		.has-black-color {
+			color: var(--wp--preset--color--black) !important;
+		}
+
+		.has-cyan-bluish-gray-color {
+			color: var(--wp--preset--color--cyan-bluish-gray) !important;
+		}
+
+		.has-white-color {
+			color: var(--wp--preset--color--white) !important;
+		}
+
+		.has-pale-pink-color {
+			color: var(--wp--preset--color--pale-pink) !important;
+		}
+
+		.has-vivid-red-color {
+			color: var(--wp--preset--color--vivid-red) !important;
+		}
+
+		.has-luminous-vivid-orange-color {
+			color: var(--wp--preset--color--luminous-vivid-orange) !important;
+		}
+
+		.has-luminous-vivid-amber-color {
+			color: var(--wp--preset--color--luminous-vivid-amber) !important;
+		}
+
+		.has-light-green-cyan-color {
+			color: var(--wp--preset--color--light-green-cyan) !important;
+		}
+
+		.has-vivid-green-cyan-color {
+			color: var(--wp--preset--color--vivid-green-cyan) !important;
+		}
+
+		.has-pale-cyan-blue-color {
+			color: var(--wp--preset--color--pale-cyan-blue) !important;
+		}
+
+		.has-vivid-cyan-blue-color {
+			color: var(--wp--preset--color--vivid-cyan-blue) !important;
+		}
+
+		.has-vivid-purple-color {
+			color: var(--wp--preset--color--vivid-purple) !important;
+		}
+
+		.has-black-background-color {
+			background-color: var(--wp--preset--color--black) !important;
+		}
+
+		.has-cyan-bluish-gray-background-color {
+			background-color: var(--wp--preset--color--cyan-bluish-gray) !important;
+		}
+
+		.has-white-background-color {
+			background-color: var(--wp--preset--color--white) !important;
+		}
+
+		.has-pale-pink-background-color {
+			background-color: var(--wp--preset--color--pale-pink) !important;
+		}
+
+		.has-vivid-red-background-color {
+			background-color: var(--wp--preset--color--vivid-red) !important;
+		}
+
+		.has-luminous-vivid-orange-background-color {
+			background-color: var(--wp--preset--color--luminous-vivid-orange) !important;
+		}
+
+		.has-luminous-vivid-amber-background-color {
+			background-color: var(--wp--preset--color--luminous-vivid-amber) !important;
+		}
+
+		.has-light-green-cyan-background-color {
+			background-color: var(--wp--preset--color--light-green-cyan) !important;
+		}
+
+		.has-vivid-green-cyan-background-color {
+			background-color: var(--wp--preset--color--vivid-green-cyan) !important;
+		}
+
+		.has-pale-cyan-blue-background-color {
+			background-color: var(--wp--preset--color--pale-cyan-blue) !important;
+		}
+
+		.has-vivid-cyan-blue-background-color {
+			background-color: var(--wp--preset--color--vivid-cyan-blue) !important;
+		}
+
+		.has-vivid-purple-background-color {
+			background-color: var(--wp--preset--color--vivid-purple) !important;
+		}
+
+		.has-black-border-color {
+			border-color: var(--wp--preset--color--black) !important;
+		}
+
+		.has-cyan-bluish-gray-border-color {
+			border-color: var(--wp--preset--color--cyan-bluish-gray) !important;
+		}
+
+		.has-white-border-color {
+			border-color: var(--wp--preset--color--white) !important;
+		}
+
+		.has-pale-pink-border-color {
+			border-color: var(--wp--preset--color--pale-pink) !important;
+		}
+
+		.has-vivid-red-border-color {
+			border-color: var(--wp--preset--color--vivid-red) !important;
+		}
+
+		.has-luminous-vivid-orange-border-color {
+			border-color: var(--wp--preset--color--luminous-vivid-orange) !important;
+		}
+
+		.has-luminous-vivid-amber-border-color {
+			border-color: var(--wp--preset--color--luminous-vivid-amber) !important;
+		}
+
+		.has-light-green-cyan-border-color {
+			border-color: var(--wp--preset--color--light-green-cyan) !important;
+		}
+
+		.has-vivid-green-cyan-border-color {
+			border-color: var(--wp--preset--color--vivid-green-cyan) !important;
+		}
+
+		.has-pale-cyan-blue-border-color {
+			border-color: var(--wp--preset--color--pale-cyan-blue) !important;
+		}
+
+		.has-vivid-cyan-blue-border-color {
+			border-color: var(--wp--preset--color--vivid-cyan-blue) !important;
+		}
+
+		.has-vivid-purple-border-color {
+			border-color: var(--wp--preset--color--vivid-purple) !important;
+		}
+
+		.has-vivid-cyan-blue-to-vivid-purple-gradient-background {
+			background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;
+		}
+
+		.has-light-green-cyan-to-vivid-green-cyan-gradient-background {
+			background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;
+		}
+
+		.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background {
+			background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;
+		}
+
+		.has-luminous-vivid-orange-to-vivid-red-gradient-background {
+			background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;
+		}
+
+		.has-very-light-gray-to-cyan-bluish-gray-gradient-background {
+			background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;
+		}
+
+		.has-cool-to-warm-spectrum-gradient-background {
+			background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;
+		}
+
+		.has-blush-light-purple-gradient-background {
+			background: var(--wp--preset--gradient--blush-light-purple) !important;
+		}
+
+		.has-blush-bordeaux-gradient-background {
+			background: var(--wp--preset--gradient--blush-bordeaux) !important;
+		}
+
+		.has-luminous-dusk-gradient-background {
+			background: var(--wp--preset--gradient--luminous-dusk) !important;
+		}
+
+		.has-pale-ocean-gradient-background {
+			background: var(--wp--preset--gradient--pale-ocean) !important;
+		}
+
+		.has-electric-grass-gradient-background {
+			background: var(--wp--preset--gradient--electric-grass) !important;
+		}
+
+		.has-midnight-gradient-background {
+			background: var(--wp--preset--gradient--midnight) !important;
+		}
+
+		.has-small-font-size {
+			font-size: var(--wp--preset--font-size--small) !important;
+		}
+
+		.has-medium-font-size {
+			font-size: var(--wp--preset--font-size--medium) !important;
+		}
+
+		.has-large-font-size {
+			font-size: var(--wp--preset--font-size--large) !important;
+		}
+
+		.has-x-large-font-size {
+			font-size: var(--wp--preset--font-size--x-large) !important;
+		}
+
+		.wp-block-navigation a:where(:not(.wp-element-button)) {
+			color: inherit;
+		}
+
+		:where(.wp-block-post-template.is-layout-flex) {
+			gap: 1.25em;
+		}
+
+		:where(.wp-block-post-template.is-layout-grid) {
+			gap: 1.25em;
+		}
+
+		:where(.wp-block-columns.is-layout-flex) {
+			gap: 2em;
+		}
+
+		:where(.wp-block-columns.is-layout-grid) {
+			gap: 2em;
+		}
+
+		.wp-block-pullquote {
+			font-size: 1.5em;
+			line-height: 1.6;
+		}
+	</style>
+	<link data-minify="1" rel="stylesheet" id="the7-font-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/cache/min/1/wp-content/themes/dt-the7/fonts/icomoon-the7-font/icomoon-the7-font.min.css?ver=1713195450"
+		type="text/css" media="all">
+	<link data-minify="1" rel="stylesheet" id="the7-awesome-fonts-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/cache/min/1/wp-content/themes/dt-the7/fonts/FontAwesome/css/all.min.css?ver=1713195450"
+		type="text/css" media="all">
+	<link data-minify="1" rel="stylesheet" id="js_composer_front-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/cache/min/1/wp-content/plugins/js_composer/assets/css/js_composer.min.css?ver=1713195450"
+		type="text/css" media="all">
+
+	<link rel="stylesheet" id="dt-main-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/themes/dt-the7/css/main.min.css?ver=11.9.3"
+		type="text/css" media="all">
+	<link rel="stylesheet" id="the7-custom-scrollbar-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/themes/dt-the7/lib/custom-scrollbar/custom-scrollbar.min.css?ver=11.9.3"
+		type="text/css" media="all">
+	<link rel="stylesheet" id="the7-wpbakery-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/themes/dt-the7/css/wpbakery.min.css?ver=11.9.3"
+		type="text/css" media="all">
+	<link rel="stylesheet" id="the7-core-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/plugins/dt-the7-core/assets/css/post-type.min.css?ver=2.7.7"
+		type="text/css" media="all">
+	<link data-minify="1" rel="stylesheet" id="the7-css-vars-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/cache/min/1/wp-content/uploads/the7-css/css-vars.css?ver=1713195451"
+		type="text/css" media="all">
+	<link data-minify="1" rel="stylesheet" id="dt-custom-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/cache/min/1/wp-content/uploads/the7-css/custom.css?ver=1713195451"
+		type="text/css" media="all">
+	<link data-minify="1" rel="stylesheet" id="dt-media-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/cache/min/1/wp-content/uploads/the7-css/media.css?ver=1713195451"
+		type="text/css" media="all">
+	<link data-minify="1" rel="stylesheet" id="the7-mega-menu-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/cache/min/1/wp-content/uploads/the7-css/mega-menu.css?ver=1713195451"
+		type="text/css" media="all">
+	<link data-minify="1" rel="stylesheet" id="the7-elements-albums-portfolio-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/cache/min/1/wp-content/uploads/the7-css/the7-elements-albums-portfolio.css?ver=1713195451"
+		type="text/css" media="all">
+	<link data-minify="1" rel="stylesheet" id="the7-elements-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/cache/min/1/wp-content/uploads/the7-css/post-type-dynamic.css?ver=1713195451"
+		type="text/css" media="all">
+	<link rel="stylesheet" id="style-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/themes/dt-the7/style.css?ver=11.9.3" type="text/css"
+		media="all">
+
+	<link rel="stylesheet" id="ultimate-vc-addons-style-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/plugins/Ultimate_VC_Addons/assets/min-css/style.min.css?ver=3.19.19"
+		type="text/css" media="all">
+	<link rel="stylesheet" id="ultimate-vc-addons-headings-style-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/plugins/Ultimate_VC_Addons/assets/min-css/headings.min.css?ver=3.19.19"
+		type="text/css" media="all">
+	<link rel="stylesheet" id="ultimate-vc-addons-animate-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/plugins/Ultimate_VC_Addons/assets/min-css/animate.min.css?ver=3.19.19"
+		type="text/css" media="all">
+	<link rel="stylesheet" id="ultimate-vc-addons-info-box-style-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/plugins/Ultimate_VC_Addons/assets/min-css/info-box.min.css?ver=3.19.19"
+		type="text/css" media="all">
+	<style id="rocket-lazyload-inline-css" type="text/css">
+		.rll-youtube-player {
+			position: relative;
+			padding-bottom: 56.23%;
+			height: 0;
+			overflow: hidden;
+			max-width: 100%;
+		}
+
+		.rll-youtube-player:focus-within {
+			outline: 2px solid currentColor;
+			outline-offset: 5px;
+		}
+
+		.rll-youtube-player iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 100;
+			background: 0 0
+		}
+
+		.rll-youtube-player img {
+			bottom: 0;
+			display: block;
+			left: 0;
+			margin: auto;
+			max-width: 100%;
+			width: 100%;
+			position: absolute;
+			right: 0;
+			top: 0;
+			border: none;
+			height: auto;
+			-webkit-transition: .4s all;
+			-moz-transition: .4s all;
+			transition: .4s all
+		}
+
+		.rll-youtube-player img:hover {
+			-webkit-filter: brightness(75%)
+		}
+
+		.rll-youtube-player .play {
+			height: 100%;
+			width: 100%;
+			left: 0;
+			top: 0;
+			position: absolute;
+			background: url(../../jmarcondes.com.br/wp-content/plugins/wp-rocket/assets/img/youtube.png) no-repeat center;
+			background-color: transparent !important;
+			cursor: pointer;
+			border: none;
+		}
+
+		.wp-embed-responsive .wp-has-aspect-ratio .rll-youtube-player {
+			position: absolute;
+			padding-bottom: 0;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0
+		}
+	</style>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript"
+		src="../../jmarcondes.com.br/wp-includes/js/jquery/jquery.min_ver%3D3.7.1.js" id="jquery-core-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-includes/js/jquery/jquery-migrate.min_ver%3D3.4.1.js"
+		id="jquery-migrate-js"></script>
+	<script type="text/javascript" id="dt-above-fold-js-extra">
+		/* <![CDATA[ */
+		var dtLocal = { "themeUrl": "https:\/\/jmarcondes.com.br\/wp-content\/themes\/dt-the7", "passText": "Para ver esse post protegido, insira a senha abaixo:", "moreButtonText": { "loading": "Carregando...", "loadMore": "Veja mais" }, "postID": "308", "ajaxurl": "https:\/\/jmarcondes.com.br\/wp-admin\/admin-ajax.php", "REST": { "baseUrl": "https:\/\/jmarcondes.com.br\/wp-json\/the7\/v1", "endpoints": { "sendMail": "\/send-mail" } }, "contactMessages": { "required": "One or more fields have an error. Please check and try again.", "terms": "Please accept the privacy policy.", "fillTheCaptchaError": "Please, fill the captcha." }, "captchaSiteKey": "", "ajaxNonce": "cdd1556aca", "pageData": { "type": "page", "template": "page", "layout": null }, "themeSettings": { "smoothScroll": "off", "lazyLoading": false, "desktopHeader": { "height": 100 }, "ToggleCaptionEnabled": "disabled", "ToggleCaption": "Navigation", "floatingHeader": { "showAfter": 140, "showMenu": true, "height": 120, "logo": { "showLogo": true, "html": "<img class=\" preload-me\" src=\"https:\/\/jmarcondes.com.br\/wp-content\/uploads\/2021\/11\/logo-j-marcondes.png\" srcset=\"https:\/\/jmarcondes.com.br\/wp-content\/uploads\/2021\/11\/logo-j-marcondes.png 250w, https:\/\/jmarcondes.com.br\/wp-content\/uploads\/2021\/11\/logo-j-marcondes.png 250w\" width=\"250\" height=\"100\"   sizes=\"250px\" alt=\"J  Marcondes\" \/>", "url": "https:\/\/jmarcondes.com.br\/" } }, "topLine": { "floatingTopLine": { "logo": { "showLogo": false, "html": "" } } }, "mobileHeader": { "firstSwitchPoint": 992, "secondSwitchPoint": 778, "firstSwitchPointHeight": 60, "secondSwitchPointHeight": 60, "mobileToggleCaptionEnabled": "disabled", "mobileToggleCaption": "Menu" }, "stickyMobileHeaderFirstSwitch": { "logo": { "html": "<img class=\" preload-me\" src=\"https:\/\/jmarcondes.com.br\/wp-content\/uploads\/2021\/11\/logo-j-marcondes.png\" srcset=\"https:\/\/jmarcondes.com.br\/wp-content\/uploads\/2021\/11\/logo-j-marcondes.png 250w, https:\/\/jmarcondes.com.br\/wp-content\/uploads\/2021\/11\/logo-j-marcondes.png 250w\" width=\"250\" height=\"100\"   sizes=\"250px\" alt=\"J  Marcondes\" \/>" } }, "stickyMobileHeaderSecondSwitch": { "logo": { "html": "<img class=\" preload-me\" src=\"https:\/\/jmarcondes.com.br\/wp-content\/uploads\/2021\/11\/logo-j-marcondes.png\" srcset=\"https:\/\/jmarcondes.com.br\/wp-content\/uploads\/2021\/11\/logo-j-marcondes.png 250w, https:\/\/jmarcondes.com.br\/wp-content\/uploads\/2021\/11\/logo-j-marcondes.png 250w\" width=\"250\" height=\"100\"   sizes=\"250px\" alt=\"J  Marcondes\" \/>" } }, "sidebar": { "switchPoint": 990 }, "boxedWidth": "1280px" }, "VCMobileScreenWidth": "778" };
+		var dtShare = { "shareButtonText": { "facebook": "Share on Facebook", "twitter": "Tweet", "pinterest": "Pin it", "linkedin": "Share on Linkedin", "whatsapp": "Share on Whatsapp" }, "overlayOpacity": "85" };
+		/* ]]> */
+	</script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/themes/dt-the7/js/above-the-fold.min_ver%3D11.9.3.js"
+		id="dt-above-fold-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/plugins/Ultimate_VC_Addons/assets/min-js/ultimate-params.min_ver%3D3.19.19.js"
+		id="ultimate-vc-addons-params-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/plugins/Ultimate_VC_Addons/assets/min-js/jquery-appear.min_ver%3D3.19.19.js"
+		id="ultimate-vc-addons-appear-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/plugins/Ultimate_VC_Addons/assets/min-js/custom.min_ver%3D3.19.19.js"
+		id="ultimate-vc-addons-custom-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/plugins/Ultimate_VC_Addons/assets/min-js/headings.min_ver%3D3.19.19.js"
+		id="ultimate-vc-addons-headings-script-js"></script>
+	<script type="rocketlazyloadscript"></script>
+	<link rel="https://api.w.org/" href="https://jmarcondes.com.br/wp-json/">
+	<link rel="alternate" type="application/json" href="https://jmarcondes.com.br/wp-json/wp/v2/pages/308">
+	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://jmarcondes.com.br/xmlrpc.php?rsd">
+	<meta name="generator" content="WordPress 6.4.3">
+	<link rel="canonical" href="https://jmarcondes.com.br/contatos/">
+	<link rel="shortlink" href="https://jmarcondes.com.br/?p=308">
+	<link rel="alternate" type="application/json+oembed"
+		href="https://jmarcondes.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fjmarcondes.com.br%2Fcontatos%2F">
+	<link rel="alternate" type="text/xml+oembed"
+		href="https://jmarcondes.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fjmarcondes.com.br%2Fcontatos%2F&amp;format=xml">
+	<!-- HFCM by 99 Robots - Snippet # 1: GTM - Head -->
+	<!-- Google Tag Manager -->
+	<script type="rocketlazyloadscript">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-THM3SVKC');</script>
+	<!-- End Google Tag Manager -->
+	<!-- /end HFCM by 99 Robots -->
+	<script
+		type="rocketlazyloadscript">document.createElement( "picture" );if(!window.HTMLPictureElement && document.addEventListener) {window.addEventListener("DOMContentLoaded", function() {var s = document.createElement("script");s.src = "https://jmarcondes.com.br/wp-content/plugins/webp-express/js/picturefill.min.js";document.body.appendChild(s);});}</script>
+	<meta property="og:site_name" content="J  Marcondes">
+	<meta property="og:title" content="Contatos">
+	<meta property="og:url" content="https://jmarcondes.com.br/contatos/">
+	<meta property="og:type" content="article">
+	<meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress.">
+	<meta name="generator"
+		content="Powered by Slider Revolution 6.6.18 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface.">
+	<link rel="icon" href="https://jmarcondes.com.br/wp-content/uploads/sites/26/2016/09/the7-new-fav1.gif"
+		type="image/gif" sizes="16x16">
+	<link rel="icon" href="https://jmarcondes.com.br/wp-content/uploads/sites/26/2016/09/the7-new-fav-hd1.gif"
+		type="image/gif" sizes="32x32">
+	<script type="rocketlazyloadscript">function setREVStartSize(e){
+			//window.requestAnimationFrame(function() {
+				window.RSIW = window.RSIW===undefined ? window.innerWidth : window.RSIW;
+				window.RSIH = window.RSIH===undefined ? window.innerHeight : window.RSIH;
+				try {
+					var pw = document.getElementById(e.c).parentNode.offsetWidth,
+						newh;
+					pw = pw===0 || isNaN(pw) || (e.l=="fullwidth" || e.layout=="fullwidth") ? window.RSIW : pw;
+					e.tabw = e.tabw===undefined ? 0 : parseInt(e.tabw);
+					e.thumbw = e.thumbw===undefined ? 0 : parseInt(e.thumbw);
+					e.tabh = e.tabh===undefined ? 0 : parseInt(e.tabh);
+					e.thumbh = e.thumbh===undefined ? 0 : parseInt(e.thumbh);
+					e.tabhide = e.tabhide===undefined ? 0 : parseInt(e.tabhide);
+					e.thumbhide = e.thumbhide===undefined ? 0 : parseInt(e.thumbhide);
+					e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);
+					if(e.layout==="fullscreen" || e.l==="fullscreen")
+						newh = Math.max(e.mh,window.RSIH);
+					else{
+						e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
+						for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];
+						e.gh = e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh : e.el;
+						e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
+						for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i] = e.gh[i-1];
+											
+						var nl = new Array(e.rl.length),
+							ix = 0,
+							sl;
+						e.tabw = e.tabhide>=pw ? 0 : e.tabw;
+						e.thumbw = e.thumbhide>=pw ? 0 : e.thumbw;
+						e.tabh = e.tabhide>=pw ? 0 : e.tabh;
+						e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;
+						for (var i in e.rl) nl[i] = e.rl[i]<window.RSIW ? 0 : e.rl[i];
+						sl = nl[0];
+						for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}
+						var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);
+						newh =  (e.gh[ix] * m) + (e.tabh + e.thumbh);
+					}
+					var el = document.getElementById(e.c);
+					if (el!==null && el) el.style.height = newh+"px";
+					el = document.getElementById(e.c+"_wrapper");
+					if (el!==null && el) {
+						el.style.height = newh+"px";
+						el.style.display = "block";
+					}
+				} catch(e){
+					console.log("Failure at Presize of Slider:" + e)
+				}
+			//});
+		  };</script>
+	<style type="text/css" data-type="vc_shortcodes-custom-css">
+		.vc_custom_1634135649051 {
+			margin-bottom: 30px !important;
+			padding-top: 30px !important;
+		}
+
+		.vc_custom_1634135626326 {
+			padding-top: 30px !important;
+			padding-bottom: 30px !important;
+		}
+
+		.vc_custom_1495106084943 {
+			padding-right: 25px !important;
+			padding-bottom: 40px !important;
+			padding-left: 25px !important;
+		}
+
+		.vc_custom_1495106016533 {
+			margin-bottom: 30px !important;
+			padding-top: 30px !important;
+			padding-right: 30px !important;
+			padding-bottom: 40px !important;
+			padding-left: 30px !important;
+			background-color: #f4f4f4 !important;
+		}
+
+		.vc_custom_1495106021822 {
+			margin-bottom: 30px !important;
+			padding-top: 30px !important;
+			padding-right: 30px !important;
+			padding-bottom: 40px !important;
+			padding-left: 30px !important;
+			background-color: #f4f4f4 !important;
+		}
+	</style><noscript>
+		<style>
+			.wpb_animate_when_almost_visible {
+				opacity: 1;
+			}
+		</style>
+	</noscript>
+	<style id="the7-custom-inline-css" type="text/css">
+		.branding a img,
+		.branding img {
+			max-width: 100%;
+			height: auto;
+			position: absolute;
+			margin-top: -68px;
+		}
+
+		.vc_col-has-fill>.vc_column-inner,
+		.vc_row-has-fill+.vc_row-full-width+.vc_row>.vc_column_container>.vc_column-inner,
+		.vc_row-has-fill+.vc_row>.vc_column_container>.vc_column-inner,
+		.vc_row-has-fill>.vc_column_container>.vc_column-inner {
+			padding-top: 0px;
+		}
+
+		.wpb_button,
+		.wpb_content_element,
+		ul.wpb_thumbnails-fluid>li {
+			margin-bottom: 0px;
+		}
+
+		a {
+			text-decoration: none;
+		}
+	</style>
+	<noscript>
+		<style id="rocket-lazyload-nojs-css">
+			.rll-youtube-player,
+			[data-lazy-src] {
+				display: none !important;
+			}
+		</style>
+	</noscript>
+</head>
+
+<body id="the7-body"
+	class="page-template-default page page-id-308 wp-embed-responsive the7-core-ver-2.7.7 dt-responsive-on right-mobile-menu-close-icon ouside-menu-close-icon mobile-hamburger-close-bg-enable mobile-hamburger-close-bg-hover-enable  fade-medium-mobile-menu-close-icon fade-small-menu-close-icon srcset-enabled btn-flat custom-btn-color accent-btn-hover-color phantom-sticky phantom-shadow-decoration phantom-main-logo-on sticky-mobile-header top-header first-switch-logo-center first-switch-menu-right second-switch-logo-center second-switch-menu-right right-mobile-menu layzr-loading-on popup-message-style the7-ver-11.9.3 dt-fa-compatibility wpb-js-composer js-comp-ver-7.2 vc_responsive">
+	<!-- The7 11.9.3 -->
+
+	<div id="page">
+		<a class="skip-link screen-reader-text" href="#content">Pular para o conteúdo</a>
+
+		<div class="masthead inline-header right widgets full-height dividers shadow-decoration shadow-mobile-header-decoration medium-mobile-menu-icon mobile-menu-icon-bg-on mobile-menu-icon-hover-bg-on dt-parent-menu-clickable show-sub-menu-on-hover"
+			role="banner">
+
+			<div class="top-bar full-width-line top-bar-line-hide">
+				<div class="top-bar-bg"></div>
+				<div class="mini-widgets left-widgets"></div>
+				<div class="right-widgets mini-widgets"><a href="tel:554133495598"
+						class="mini-contacts phone show-on-desktop in-top-bar-left in-top-bar"><i
+							class="fa-fw icomoon-the7-font-the7-phone-06"></i>(41) 3349-5598</a><a
+						href="tel:554136080048"
+						class="mini-contacts clock show-on-desktop in-top-bar-right in-top-bar"><i
+							class="fa-fw icomoon-the7-font-the7-phone-06"></i>(41) 3608-0048</a><a
+						href="mailto:contato@jmarcondes.com.br"
+						class="mini-contacts email show-on-desktop in-top-bar-left in-top-bar"><i
+							class="fa-fw icomoon-the7-font-the7-mail-02"></i>contato@jmarcondes.com.br</a></div>
+			</div>
+
+			<header class="header-bar">
+
+				<div class="branding">
+					<div id="site-title" class="assistive-text">J Marcondes</div>
+					<div id="site-description" class="assistive-text">Transporte escolar Transporte de funcionarios
+						Transporte para turismo em Curitiba</div>
+					<a class="same-logo" href="https://jmarcondes.com.br/">
+						<picture>
+							<source data-lazy-srcset="" sizes="250px" type="image/webp"><img
+								class=" preload-me webpexpress-processed"
+								src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20250%20100'%3E%3C/svg%3E"
+								data-lazy-srcset="" width="250" height="100" data-lazy-sizes="250px" alt="J  Marcondes"
+								data-lazy-src=""><noscript><img class=" preload-me webpexpress-processed" src=""
+									srcset="" width="250" height="100" sizes="250px" alt="J  Marcondes"></noscript>
+						</picture>
+					</a>
+				</div>
+
+				<ul id="primary-menu"
+					class="main-nav underline-decoration l-to-r-line level-arrows-on outside-item-remove-margin">
+					<li
+						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-1209 first depth-0">
+						<a href="index.html" data-level="1"><span class="menu-item-text"><span class="menu-text">Página
+									inicial</span></span></a>
+					</li>
+					<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1221 depth-0"><a
+							href="index.html" data-level="1"><span class="menu-item-text"><span class="menu-text">Sobre
+									nós</span></span></a></li>
+					<li
+						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1207 has-children depth-0">
+						<a href="index.html" data-level="1"><span class="menu-item-text"><span
+									class="menu-text">Serviços</span></span></a>
+						<ul class="sub-nav hover-style-bg level-arrows-on">
+							<li
+								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1797 first depth-1">
+								<a href="Contato.html" data-level="2"><span class="menu-item-text"><span
+											class="menu-text">Transporte
+											eventuais</span></span></a>
+							</li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1799 depth-1">
+								<a href="Contato.html" data-level="2"><span class="menu-item-text"><span
+											class="menu-text">Transporte
+											escolar</span></span></a>
+							</li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1800 depth-1">
+								<a href="Contato.html" data-level="2"><span class="menu-item-text"><span
+											class="menu-text">Transporte de
+											funcionários</span></span></a>
+							</li>
+							<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1815 depth-1">
+								<a href="Contato.html" data-level="2"><span class="menu-item-text"><span
+											class="menu-text">Venda de ônibus</span></span></a>
+							</li>
+						</ul>
+					</li>
+					<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1225 depth-0"><a
+							href="Contato.html" data-level="1"><span class="menu-item-text"><span
+									class="menu-text">Frota</span></span></a></li>
+					<li
+						class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-308 current_page_item menu-item-1219 act last depth-0">
+						<a href="Contato.html" data-level="1"><span class="menu-item-text"><span
+									class="menu-text">Contatos</span></span></a>
+					</li>
+				</ul>
+
+			</header>
+
+		</div>
+		<div role="navigation" class="dt-mobile-header mobile-menu-show-divider">
+			<div class="dt-close-mobile-menu-icon">
+				<div class="close-line-wrap"><span class="close-line"></span><span class="close-line"></span><span
+						class="close-line"></span></div>
+			</div>
+			<ul id="mobile-menu" class="mobile-main-nav">
+				<li
+					class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-1209 first depth-0">
+					<a href="index.html" data-level="1"><span class="menu-item-text"><span class="menu-text">Página
+								inicial</span></span></a>
+				</li>
+				<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1221 depth-0"><a
+						href="index.html" data-level="1"><span class="menu-item-text"><span class="menu-text">Sobre
+								nós</span></span></a></li>
+				<li
+					class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1207 has-children depth-0">
+					<a href="Contato.html" data-level="1"><span class="menu-item-text"><span
+								class="menu-text">Serviços</span></span></a>
+					<ul class="sub-nav hover-style-bg level-arrows-on">
+						<li
+							class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1797 first depth-1">
+							<a href="Contato.html" data-level="2"><span class="menu-item-text"><span
+										class="menu-text">Transporte
+										eventuais</span></span></a>
+						</li>
+						<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1799 depth-1"><a
+								href="Contato.html" data-level="2"><span class="menu-item-text"><span
+										class="menu-text">Transporte escolar</span></span></a>
+						</li>
+						<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1800 depth-1"><a
+								href="Contato.html" data-level="2"><span class="menu-item-text"><span
+										class="menu-text">Transporte de
+										funcionários</span></span></a></li>
+						<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1815 depth-1"><a
+								href="Contato.html" data-level="2"><span class="menu-item-text"><span
+										class="menu-text">Venda de ônibus</span></span></a>
+						</li>
+					</ul>
+				</li>
+				<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1225 depth-0"><a
+						href="index.html" data-level="1"><span class="menu-item-text"><span
+								class="menu-text">Frota</span></span></a></li>
+				<li
+					class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-308 current_page_item menu-item-1219 act last depth-0">
+					<a href="Contato.html" data-level="1"><span class="menu-item-text"><span
+								class="menu-text">Contatos</span></span></a>
+				</li>
+			</ul>
+			<div class="mobile-mini-widgets-in-menu"></div>
+		</div>
+
+		<style id="the7-page-content-style">
+			#main {
+				padding-top: 0px;
+				padding-bottom: 0px;
+			}
+
+			@media screen and (max-width: 778px) {
+				#main {
+					padding-top: 0px;
+					padding-bottom: 0px;
+				}
+			}
+		</style>
+		<div
+			class="page-title content-left solid-bg breadcrumbs-mobile-off page-title-responsive-enabled bg-img-enabled">
+			<div class="wf-wrap">
+
+				<div class="page-title-head hgroup">
+					<h1>Contatos</h1>
+				</div>
+				<div class="page-title-breadcrumbs">
+					<div class="assistive-text">Você está aqui:</div>
+					<ol class="breadcrumbs text-small" itemscope="" itemtype="https://schema.org/BreadcrumbList">
+						<li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem"><a
+								itemprop="item" href="Contato.html" title="Início"><span
+									itemprop="name">Início</span></a>
+							<meta itemprop="position" content="1">
+						</li>
+						<li class="current" itemprop="itemListElement" itemscope=""
+							itemtype="https://schema.org/ListItem"><span itemprop="name">Contatos</span>
+							<meta itemprop="position" content="2">
+						</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div id="main" class="sidebar-none sidebar-divider-off">
+
+
+			<div class="main-gradient"></div>
+			<div class="wf-wrap">
+				<div class="wf-container-main">
+
+
+
+
+					<div id="content" class="content" role="main">
+
+						<div class="wpb-content-wrapper">
+							<div class="vc_row wpb_row vc_row-fluid vc_custom_1634135649051">
+								<div class="wpb_column vc_column_container vc_col-sm-6">
+									<div class="vc_column-inner">
+										<div class="wpb_wrapper">
+											<div id="ultimate-heading-234662a4904df9b8"
+												class="uvc-heading ult-adjust-bottom-margin ultimate-heading-234662a4904df9b8 uvc-8241 "
+												data-hspacer="line_only" data-halign="left" style="text-align:left">
+												<div class="uvc-main-heading ult-responsive"
+													data-ultimate-target=".uvc-heading.ultimate-heading-234662a4904df9b8 h2"
+													data-responsive-json-new="{"
+													font-size":"desktop:40px;","line-height":""}"="">
+													<h2 style="font-family:'Montserrat';font-weight:700;">Fazenda Rio
+														Grande</h2>
+												</div>
+												<div class="uvc-heading-spacer line_only" style="topheight:1px;"><span
+														class="uvc-headings-line"
+														style="border-style:solid;border-bottom-width:1px;border-color:#e67f19;width:100px;"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="wpb_column vc_column_container vc_col-sm-6">
+									<div class="vc_column-inner">
+										<div class="wpb_wrapper">
+											<div id="ultimate-heading-7773662a4904dfc6c"
+												class="uvc-heading ult-adjust-bottom-margin ultimate-heading-7773662a4904dfc6c uvc-8300 "
+												data-hspacer="line_only" data-halign="left" style="text-align:left">
+												<div class="uvc-main-heading ult-responsive"
+													data-ultimate-target=".uvc-heading.ultimate-heading-7773662a4904dfc6c h2"
+													data-responsive-json-new="{"
+													font-size":"desktop:40px;","line-height":""}"="">
+													<h2 style="font-family:'Montserrat';font-weight:700;">Curitiba</h2>
+												</div>
+												<div class="uvc-heading-spacer line_only" style="topheight:1px;"><span
+														class="uvc-headings-line"
+														style="border-style:solid;border-bottom-width:1px;border-color:#e67f19;width:100px;"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div
+								class="vc_row wpb_row vc_row-fluid wpb_animate_when_almost_visible wpb_fadeIn fadeIn vc_custom_1634135626326">
+								<div class="wpb_column vc_column_container vc_col-sm-6">
+									<div class="vc_column-inner">
+										<div class="wpb_wrapper">
+											<div class="aio-icon-component    style_3"><a class="aio-icon-box-link"
+													href="tel:554136080048" title="Fazenda Rio Grande">
+													<div id="Info-box-wrap-9318" class="aio-icon-box default-icon"
+														style="">
+														<div class="aio-icon-default">
+															<div class="ult-just-icon-wrapper  ">
+																<div class="align-icon" style="text-align:center;">
+																	<div class="aio-icon circle "
+																		data-animation="fadeInUpBig"
+																		data-animation-delay="03"
+																		style="color:#ffffff;background:#e67f19;font-size:25px;display:inline-block;">
+																		<i class="icomoon-the7-font-the7-phone-05"></i>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="aio-icon-header">
+															<h5 class="aio-icon-title ult-responsive"
+																data-ultimate-target="#Info-box-wrap-9318 .aio-icon-title"
+																data-responsive-json-new="{"
+																font-size":"desktop:25px;","line-height":""}"=""
+																style="font-family:'Montserrat';font-weight:700;color:#e67f19;">
+																Telefone</h5>
+														</div> <!-- header -->
+														<div class="aio-icon-description ult-responsive"
+															data-ultimate-target="#Info-box-wrap-9318 .aio-icon-description"
+															data-responsive-json-new="{"
+															font-size":"","line-height":""}"="" style="">
+															<p></p>
+															<p style="text-align: left;"><span
+																	style="color: #000000;"><strong>(41)
+																		3608-0048</strong></span></p>
+															<p></p>
+														</div> <!-- description -->
+													</div> <!-- aio-icon-box -->
+												</a></div> <!-- aio-icon-component -->
+											<div class="aio-icon-component    style_3"><a class="aio-icon-box-link"
+													href="mailto:contato@jmarcondes.com.br" title="Fazenda Rio Grande">
+													<div id="Info-box-wrap-1390" class="aio-icon-box default-icon"
+														style="">
+														<div class="aio-icon-default">
+															<div class="ult-just-icon-wrapper  ">
+																<div class="align-icon" style="text-align:center;">
+																	<div class="aio-icon circle "
+																		data-animation="fadeInUpBig"
+																		data-animation-delay="03"
+																		style="color:#ffffff;background:#e67f19;font-size:25px;display:inline-block;">
+																		<i class="icomoon-the7-font-the7-mail-02"></i>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="aio-icon-header">
+															<h4 class="aio-icon-title ult-responsive"
+																data-ultimate-target="#Info-box-wrap-1390 .aio-icon-title"
+																data-responsive-json-new="{"
+																font-size":"desktop:25px;","line-height":""}"=""
+																style="font-family:'Montserrat';font-weight:700;color:#e67f19;">
+																E-mail</h4>
+														</div> <!-- header -->
+														<div class="aio-icon-description ult-responsive"
+															data-ultimate-target="#Info-box-wrap-1390 .aio-icon-description"
+															data-responsive-json-new="{"
+															font-size":"","line-height":""}"="" style="">
+															<p></p>
+															<p style="text-align: left;"><strong><span
+																		style="color: #000000;">fazenda@jmarcondes.com.br</span></strong>
+															</p>
+															<p></p>
+														</div> <!-- description -->
+													</div> <!-- aio-icon-box -->
+												</a></div> <!-- aio-icon-component -->
+											<div class="aio-icon-component    style_3"><a class="aio-icon-box-link"
+													href="https://goo.gl/maps/VMNn41jPdvfX9URH9"
+													title="Fazenda Rio Grande">
+													<div id="Info-box-wrap-7539" class="aio-icon-box default-icon"
+														style="">
+														<div class="aio-icon-default">
+															<div class="ult-just-icon-wrapper  ">
+																<div class="align-icon" style="text-align:center;">
+																	<div class="aio-icon circle "
+																		data-animation="fadeInUpBig"
+																		data-animation-delay="03"
+																		style="color:#ffffff;background:#e67f19;font-size:25px;display:inline-block;">
+																		<i class="icomoon-the7-font-the7-map-06"></i>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="aio-icon-header">
+															<h5 class="aio-icon-title ult-responsive"
+																data-ultimate-target="#Info-box-wrap-7539 .aio-icon-title"
+																data-responsive-json-new="{"
+																font-size":"desktop:25px;","line-height":""}"=""
+																style="font-family:'Montserrat';font-weight:700;color:#e67f19;">
+																Endereço</h5>
+														</div> <!-- header -->
+														<div class="aio-icon-description ult-responsive"
+															data-ultimate-target="#Info-box-wrap-7539 .aio-icon-description"
+															data-responsive-json-new="{"
+															font-size":"","line-height":""}"="" style="">
+															<p></p>
+															<p style="text-align: left;"><strong><span
+																		style="color: #000000;">Rua Copaíba, nº 770 –
+																		bairro Eucaliptos – Fazenda Rio
+																		Grande</span></strong></p>
+															<p></p>
+														</div> <!-- description -->
+													</div> <!-- aio-icon-box -->
+												</a></div> <!-- aio-icon-component -->
+											<div
+												class="wpb_single_image wpb_content_element vc_align_center  wpb_animate_when_almost_visible wpb_top-to-bottom top-to-bottom">
+
+												<figure class="wpb_wrapper vc_figure">
+													<div class="vc_single_image-wrapper   vc_box_border_grey">
+														<picture>
+															<source
+																data-lazy-srcset="https://jmarcondes.com.br/wp-content/webp-express/webp-images/uploads/2021/10/brasao-fazenda-rio-grande-3.png.webp 400w, https://jmarcondes.com.br/wp-content/webp-express/webp-images/uploads/2021/10/brasao-fazenda-rio-grande-3-300x300.png.webp 300w, https://jmarcondes.com.br/wp-content/webp-express/webp-images/uploads/2021/10/brasao-fazenda-rio-grande-3-150x150.png.webp 150w"
+																sizes="(max-width: 400px) 100vw, 400px"
+																type="image/webp"><img fetchpriority="high"
+																decoding="async"
+																data-vc-zoom="https://jmarcondes.com.br/wp-content/uploads/2021/10/brasao-fazenda-rio-grande-3.png"
+																width="400" height="400"
+																src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3C/svg%3E"
+																class="vc_single_image-img attachment-full webpexpress-processed"
+																alt="" title="brasão-fazenda-rio-grande"
+																data-lazy-srcset="https://jmarcondes.com.br/wp-content/uploads/2021/10/brasao-fazenda-rio-grande-3.png 400w, https://jmarcondes.com.br/wp-content/uploads/2021/10/brasao-fazenda-rio-grande-3-300x300.png 300w, https://jmarcondes.com.br/wp-content/uploads/2021/10/brasao-fazenda-rio-grande-3-150x150.png 150w"
+																data-lazy-sizes="(max-width: 400px) 100vw, 400px"
+																data-dt-location="https://jmarcondes.com.br/contatos/brasao-fazenda-rio-grande-4/"
+																data-lazy-src="https://jmarcondes.com.br/wp-content/uploads/2021/10/brasao-fazenda-rio-grande-3.png"><noscript><img
+																	fetchpriority="high" decoding="async"
+																	data-vc-zoom="https://jmarcondes.com.br/wp-content/uploads/2021/10/brasao-fazenda-rio-grande-3.png"
+																	width="400" height="400"
+																	src="https://jmarcondes.com.br/wp-content/uploads/2021/10/brasao-fazenda-rio-grande-3.png"
+																	class="vc_single_image-img attachment-full webpexpress-processed"
+																	alt="" title="brasão-fazenda-rio-grande"
+																	srcset="https://jmarcondes.com.br/wp-content/uploads/2021/10/brasao-fazenda-rio-grande-3.png 400w, https://jmarcondes.com.br/wp-content/uploads/2021/10/brasao-fazenda-rio-grande-3-300x300.png 300w, https://jmarcondes.com.br/wp-content/uploads/2021/10/brasao-fazenda-rio-grande-3-150x150.png 150w"
+																	sizes="(max-width: 400px) 100vw, 400px"
+																	data-dt-location="https://jmarcondes.com.br/contatos/brasao-fazenda-rio-grande-4/"></noscript>
+														</picture>
+													</div>
+												</figure>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="wpb_column vc_column_container vc_col-sm-6">
+									<div class="vc_column-inner">
+										<div class="wpb_wrapper">
+											<div class="aio-icon-component    style_3"><a class="aio-icon-box-link"
+													href="tel:554133495598" title="Curitiba">
+													<div id="Info-box-wrap-5520" class="aio-icon-box default-icon"
+														style="">
+														<div class="aio-icon-default">
+															<div class="ult-just-icon-wrapper  ">
+																<div class="align-icon" style="text-align:center;">
+																	<div class="aio-icon circle "
+																		data-animation="fadeInUpBig"
+																		data-animation-delay="03"
+																		style="color:#ffffff;background:#e67f19;font-size:25px;display:inline-block;">
+																		<i class="icomoon-the7-font-the7-phone-05"></i>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="aio-icon-header">
+															<h5 class="aio-icon-title ult-responsive"
+																data-ultimate-target="#Info-box-wrap-5520 .aio-icon-title"
+																data-responsive-json-new="{"
+																font-size":"desktop:25px;","line-height":""}"=""
+																style="font-family:'Montserrat';font-weight:700;color:#e67f19;">
+																Telefone</h5>
+														</div> <!-- header -->
+														<div class="aio-icon-description ult-responsive"
+															data-ultimate-target="#Info-box-wrap-5520 .aio-icon-description"
+															data-responsive-json-new="{"
+															font-size":"","line-height":""}"="" style=""><strong><span
+																	style="color: #000000;">(41)
+																	3349-5598</span></strong></div> <!-- description -->
+													</div> <!-- aio-icon-box -->
+												</a></div> <!-- aio-icon-component -->
+											<div class="aio-icon-component    style_3"><a class="aio-icon-box-link"
+													href="mailto:contato@jmarcondes.com.br" title="Curitiba">
+													<div id="Info-box-wrap-4473" class="aio-icon-box default-icon"
+														style="">
+														<div class="aio-icon-default">
+															<div class="ult-just-icon-wrapper  ">
+																<div class="align-icon" style="text-align:center;">
+																	<div class="aio-icon circle "
+																		data-animation="fadeInUpBig"
+																		data-animation-delay="03"
+																		style="color:#ffffff;background:#e67f19;font-size:25px;display:inline-block;">
+																		<i class="icomoon-the7-font-the7-mail-02"></i>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="aio-icon-header">
+															<h4 class="aio-icon-title ult-responsive"
+																data-ultimate-target="#Info-box-wrap-4473 .aio-icon-title"
+																data-responsive-json-new="{"
+																font-size":"desktop:25px;","line-height":""}"=""
+																style="font-family:'Montserrat';font-weight:700;color:#e67f19;">
+																E-mail</h4>
+														</div> <!-- header -->
+														<div class="aio-icon-description ult-responsive"
+															data-ultimate-target="#Info-box-wrap-4473 .aio-icon-description"
+															data-responsive-json-new="{"
+															font-size":"","line-height":""}"="" style=""><strong><span
+																	style="color: #000000;">contato@jmarcondes.com.br</span></strong>
+														</div> <!-- description -->
+													</div> <!-- aio-icon-box -->
+												</a></div> <!-- aio-icon-component -->
+											<div class="aio-icon-component    style_3"><a class="aio-icon-box-link"
+													href="https://goo.gl/maps/ACbGMKgFrpheLVq89" title="Curitiba">
+													<div id="Info-box-wrap-3723" class="aio-icon-box default-icon"
+														style="">
+														<div class="aio-icon-default">
+															<div class="ult-just-icon-wrapper  ">
+																<div class="align-icon" style="text-align:center;">
+																	<div class="aio-icon circle "
+																		data-animation="fadeInUpBig"
+																		data-animation-delay="03"
+																		style="color:#ffffff;background:#e67f19;font-size:25px;display:inline-block;">
+																		<i class="icomoon-the7-font-the7-map-06"></i>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="aio-icon-header">
+															<h5 class="aio-icon-title ult-responsive"
+																data-ultimate-target="#Info-box-wrap-3723 .aio-icon-title"
+																data-responsive-json-new="{"
+																font-size":"desktop:25px;","line-height":""}"=""
+																style="font-family:'Montserrat';font-weight:700;color:#e67f19;">
+																Endereço</h5>
+														</div> <!-- header -->
+														<div class="aio-icon-description ult-responsive"
+															data-ultimate-target="#Info-box-wrap-3723 .aio-icon-description"
+															data-responsive-json-new="{"
+															font-size":"","line-height":""}"="" style="">
+															<p></p>
+															<p style="text-align: left;"><strong><span
+																		style="color: #000000;">Rua Quitandinha, nº 212
+																		– Bairro Sitio Cercado –
+																		Curitiba</span></strong></p>
+															<p></p>
+														</div> <!-- description -->
+													</div> <!-- aio-icon-box -->
+												</a></div> <!-- aio-icon-component -->
+											<div
+												class="wpb_single_image wpb_content_element vc_align_center  wpb_animate_when_almost_visible wpb_top-to-bottom top-to-bottom">
+
+												<figure class="wpb_wrapper vc_figure">
+													<div class="vc_single_image-wrapper   vc_box_border_grey">
+														<picture>
+															<source
+																data-lazy-srcset="https://jmarcondes.com.br/wp-content/webp-express/webp-images/uploads/2021/10/Brasao-Curitiba-1.png.webp 400w, https://jmarcondes.com.br/wp-content/webp-express/webp-images/uploads/2021/10/Brasao-Curitiba-1-300x300.png.webp 300w, https://jmarcondes.com.br/wp-content/webp-express/webp-images/uploads/2021/10/Brasao-Curitiba-1-150x150.png.webp 150w"
+																sizes="(max-width: 400px) 100vw, 400px"
+																type="image/webp"><img decoding="async"
+																data-vc-zoom="https://jmarcondes.com.br/wp-content/uploads/2021/10/Brasao-Curitiba-1.png"
+																width="400" height="400"
+																src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3C/svg%3E"
+																class="vc_single_image-img attachment-full webpexpress-processed"
+																alt="" title="Brasão-Curitiba"
+																data-lazy-srcset="https://jmarcondes.com.br/wp-content/uploads/2021/10/Brasao-Curitiba-1.png 400w, https://jmarcondes.com.br/wp-content/uploads/2021/10/Brasao-Curitiba-1-300x300.png 300w, https://jmarcondes.com.br/wp-content/uploads/2021/10/Brasao-Curitiba-1-150x150.png 150w"
+																data-lazy-sizes="(max-width: 400px) 100vw, 400px"
+																data-dt-location="https://jmarcondes.com.br/contatos/brasao-curitiba-2/"
+																data-lazy-src="https://jmarcondes.com.br/wp-content/uploads/2021/10/Brasao-Curitiba-1.png"><noscript><img
+																	decoding="async"
+																	data-vc-zoom="https://jmarcondes.com.br/wp-content/uploads/2021/10/Brasao-Curitiba-1.png"
+																	width="400" height="400"
+																	src="https://jmarcondes.com.br/wp-content/uploads/2021/10/Brasao-Curitiba-1.png"
+																	class="vc_single_image-img attachment-full webpexpress-processed"
+																	alt="" title="Brasão-Curitiba"
+																	srcset="https://jmarcondes.com.br/wp-content/uploads/2021/10/Brasao-Curitiba-1.png 400w, https://jmarcondes.com.br/wp-content/uploads/2021/10/Brasao-Curitiba-1-300x300.png 300w, https://jmarcondes.com.br/wp-content/uploads/2021/10/Brasao-Curitiba-1-150x150.png 150w"
+																	sizes="(max-width: 400px) 100vw, 400px"
+																	data-dt-location="https://jmarcondes.com.br/contatos/brasao-curitiba-2/"></noscript>
+														</picture>
+													</div>
+												</figure>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div><!-- Row Backgrounds -->
+							<div
+								class="vc_row wpb_row vc_row-fluid vc_custom_1495106084943 vc_column-gap-30 vc_row-o-equal-height vc_row-flex">
+								<div
+									class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-offset-0 vc_col-lg-6 vc_col-md-offset-0 vc_col-md-6 vc_col-sm-offset-0 vc_col-has-fill">
+									<div class="vc_column-inner vc_custom_1495106016533">
+										<div class="wpb_wrapper">
+											<div id="ultimate-heading-6657662a4904e4678"
+												class="uvc-heading ult-adjust-bottom-margin ultimate-heading-6657662a4904e4678 uvc-97 "
+												data-hspacer="no_spacer" data-halign="left" style="text-align:left">
+												<div class="uvc-heading-spacer no_spacer" style="top"></div>
+												<div class="uvc-main-heading ult-responsive"
+													data-ultimate-target=".uvc-heading.ultimate-heading-6657662a4904e4678 h2"
+													data-responsive-json-new="{"
+													font-size":"desktop:26px;","line-height":"desktop:36px;"}"="">
+													<h2
+														style="font-family:'Montserrat';font-weight:700;margin-bottom:30px;">
+														LOCAL</h2>
+												</div>
+											</div>
+											<div
+												class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeInDown fadeInDown">
+												<div class="wpb_wrapper">
+													<p><iframe loading="lazy" style="border: 0;" src="about:blank"
+															width="100%" height="450" allowfullscreen="allowfullscreen"
+															data-rocket-lazyload="fitvidscompatible"
+															data-lazy-src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7193.731910078958!2d-49.30834!3d-25.642574000000003!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dcff6bea34792b%3A0x4e106715ee3838b9!2sR.%20Copa%C3%ADba%20-%20Eucaliptos%2C%20Fazenda%20Rio%20Grande%20-%20PR%2C%2083820-057%2C%20Brasil!5e0!3m2!1spt-BR!2sus!4v1634132900136!5m2!1spt-BR!2sus"></iframe><noscript><iframe
+																style="border: 0;"
+																src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7193.731910078958!2d-49.30834!3d-25.642574000000003!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dcff6bea34792b%3A0x4e106715ee3838b9!2sR.%20Copa%C3%ADba%20-%20Eucaliptos%2C%20Fazenda%20Rio%20Grande%20-%20PR%2C%2083820-057%2C%20Brasil!5e0!3m2!1spt-BR!2sus!4v1634132900136!5m2!1spt-BR!2sus"
+																width="100%" height="450"
+																allowfullscreen="allowfullscreen"></iframe></noscript>
+													</p>
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div
+									class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-6 vc_col-md-6 vc_col-has-fill">
+									<div class="vc_column-inner vc_custom_1495106021822">
+										<div class="wpb_wrapper">
+											<div id="ultimate-heading-9370662a4904e4b52"
+												class="uvc-heading ult-adjust-bottom-margin ultimate-heading-9370662a4904e4b52 uvc-6251 "
+												data-hspacer="no_spacer" data-halign="left" style="text-align:left">
+												<div class="uvc-heading-spacer no_spacer" style="top"></div>
+												<div class="uvc-main-heading ult-responsive"
+													data-ultimate-target=".uvc-heading.ultimate-heading-9370662a4904e4b52 h2"
+													data-responsive-json-new="{"
+													font-size":"desktop:26px;","line-height":"desktop:36px;"}"="">
+													<h2
+														style="font-family:'Montserrat';font-weight:700;margin-bottom:30px;">
+														LOCAL</h2>
+												</div>
+											</div>
+											<div
+												class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeInDown fadeInDown">
+												<div class="wpb_wrapper">
+													<p><iframe loading="lazy" style="border: 0;" src="about:blank"
+															width="100%" height="450" allowfullscreen="allowfullscreen"
+															data-rocket-lazyload="fitvidscompatible"
+															data-lazy-src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d28800.856361150163!2d-49.275853!3d-25.534811!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x697ed784452741b0!2sJ.%20Marcondes%20Transportes%20Ltda.!5e0!3m2!1spt-BR!2sbr!4v1634133113322!5m2!1spt-BR!2sbr"></iframe><noscript><iframe
+																style="border: 0;"
+																src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d28800.856361150163!2d-49.275853!3d-25.534811!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x697ed784452741b0!2sJ.%20Marcondes%20Transportes%20Ltda.!5e0!3m2!1spt-BR!2sbr!4v1634133113322!5m2!1spt-BR!2sbr"
+																width="100%" height="450"
+																allowfullscreen="allowfullscreen"></iframe></noscript>
+													</p>
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><!-- #content -->
+
+
+
+
+				</div><!-- .wf-container -->
+			</div><!-- .wf-wrap -->
+
+
+		</div><!-- #main -->
+
+
+
+
+		<!-- !Footer -->
+		<footer id="footer" class="footer solid-bg">
+
+
+			<div class="wf-wrap">
+				<div class="wf-container-footer">
+					<div class="wf-container">
+						<section id="text-2" class="widget widget_text wf-cell wf-1-3">
+							<div class="textwidget">
+								<center>
+									<p><img width="250" height="100"
+											src=""
+											data-lazy-src=""><noscript><img
+												width="250" height="100"
+												src="/wp-content/uploads/2021/11/logo-j-marcondes-branca.png"></noscript>
+									</p> A J Marcondes desde 1995 no mercado, atua nos serviços de fretamento contínuo
+									para transporte de funcionários, transporte escolar e turismo.
+								</center>
+							</div>
+						</section>
+						<section id="presscore-contact-info-widget-2"
+							class="widget widget_presscore-contact-info-widget wf-cell wf-1-3">
+							<div class="widget-title">Informações de contato</div>
+							<ul class="contact-info">
+								<li><span class="color-primary"><i class="icomoon-the7-font-the7-phone-04"> </i>
+										Telefone:</span><br>(41) 3608-0048<br>Rua copaíba, 770 - EUCALIPTOS - Fazenda
+									Rio Grande
+
+								</li>
+								<li><span class="color-primary"><i class="icomoon-the7-font-the7-phone-04"> </i>
+										Endereço:</span><br>(41) 3349-5598<br>R. Quitandinha, 212 - Sítio Cercado -
+									Curitiba</li>
+								<li><span class="color-primary"><i
+											class="vc_icon_element-icon icomoon-the7-font-the7-clock-02"></i> Horário de
+										atendimento</span><br>Segunda - Sexta: 08:00 - 18:00 </li>
+							</ul>
+						</section>
+						<section id="presscore-custom-menu-one-7"
+							class="widget widget_presscore-custom-menu-one wf-cell wf-1-3">
+							<div class="widget-title">Nossos Serviços</div>
+							<ul class="custom-menu dividers-on enable-bold show-arrow">
+								<li
+									class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1803 first">
+									<a href="Contato.html"> Transporte
+										escolar</a>
+								</li>
+								<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1801"><a
+										href="Contato.html">
+										Transporte eventuais</a></li>
+								<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1804"><a
+										href="Contato.html">
+										Transporte de funcionários</a></li>
+								<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1824"><a
+										href="Contato.html">
+										Venda de ônibus</a></li>
+							</ul>
+						</section>
+					</div><!-- .wf-container -->
+				</div><!-- .wf-container-footer -->
+			</div><!-- .wf-wrap -->
+
+
+			<!-- !Bottom-bar -->
+			<div id="bottom-bar" class="logo-left" role="contentinfo">
+				<div class="wf-wrap">
+					<div class="wf-container-bottom">
+
+
+						<div class="wf-float-left">
+
+							<p>Desenvolvido por <b><a href="https://www.instagram.com/luizz_otr/?show_story_unavailable=1">Luiz Otero O Brabo e seu grupo</a></b></p>
+						</div>
+
+
+						<div class="wf-float-right">
+
+							<div class="bottom-text-block">
+								<p>© Morelli 2ºC</p>
+							</div>
+						</div>
+
+					</div><!-- .wf-container-bottom -->
+				</div><!-- .wf-wrap -->
+			</div><!-- #bottom-bar -->
+		</footer><!-- #footer -->
+
+		<a href="#" class="scroll-top"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+				xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16"
+				style="enable-background:new 0 0 16 16;" xml:space="preserve">
+				<path d="M11.7,6.3l-3-3C8.5,3.1,8.3,3,8,3c0,0,0,0,0,0C7.7,3,7.5,3.1,7.3,3.3l-3,3c-0.4,0.4-0.4,1,0,1.4c0.4,0.4,1,0.4,1.4,0L7,6.4
+	V12c0,0.6,0.4,1,1,1s1-0.4,1-1V6.4l1.3,1.3c0.4,0.4,1,0.4,1.4,0C11.9,7.5,12,7.3,12,7S11.9,6.5,11.7,6.3z"></path>
+			</svg><span class="screen-reader-text">Go to Top</span></a>
+
+	</div><!-- #page -->
+
+
+	<script type="rocketlazyloadscript">
+			window.RS_MODULES = window.RS_MODULES || {};
+			window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+			window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+			window.RS_MODULES.defered = true;
+			window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+			window.RS_MODULES.type = 'compiled';
+		</script>
+	<!-- HFCM by 99 Robots - Snippet # 2: GTM - Body -->
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THM3SVKC" height="0" width="0"
+			style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+	<!-- /end HFCM by 99 Robots -->
+	<div id="wa"></div>
+	<script type="text/html" id="wpb-modifications"> window.wpbCustomElement = 1; </script>
+	<link rel="stylesheet" id="vc_animate-css-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/plugins/js_composer/assets/lib/bower/animate-css/animate.min.css?ver=7.2"
+		type="text/css" media="all">
+	<link rel="stylesheet" id="ultimate-vc-addons-background-style-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/plugins/Ultimate_VC_Addons/assets/min-css/background-style.min.css?ver=3.19.19"
+		type="text/css" media="all">
+	<link data-minify="1" rel="stylesheet" id="rs-plugin-settings-css"
+		data-pmdelayedstyle="https://jmarcondes.com.br/wp-content/cache/min/1/wp-content/plugins/revslider/public/assets/css/rs6.css?ver=1713195451"
+		type="text/css" media="all">
+	<style id="rs-plugin-settings-inline-css" type="text/css">
+		#rs-demo-id {}
+	</style>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/themes/dt-the7/js/main.min_ver%3D11.9.3.js" id="dt-main-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/plugins/revslider/public/assets/js/rbtools.min_ver%3D6.6.18.js" async=""
+		id="tp-tools-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/plugins/revslider/public/assets/js/rs6.min_ver%3D6.6.18.js" async=""
+		id="revmin-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-browser-checker-js-after">
+/* <![CDATA[ */
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+/* ]]> */
+</script>
+	<script type="text/javascript" id="rocket-preload-links-js-extra">
+		/* <![CDATA[ */
+		var RocketPreloadLinksConfig = { "excludeUris": "\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin\/|\/logout\/|\/wp-login.php", "usesTrailingSlash": "1", "imageExt": "jpg|jpeg|gif|png|tiff|bmp|webp|avif", "fileExt": "jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm", "siteUrl": "https:\/\/jmarcondes.com.br", "onHoverDelay": "100", "rateThrottle": "3" };
+		/* ]]> */
+	</script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-preload-links-js-after">
+/* <![CDATA[ */
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+/* ]]> */
+</script>
+	<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/cache/min/1/wp-content/plugins/wp-whatsapp/assets/dist/js/njt-whatsapp_ver%3D1713195451.js"
+		id="nta-wa-libs-js"></script>
+	<script type="text/javascript" id="nta-js-global-js-extra">
+		/* <![CDATA[ */
+		var njt_wa_global = { "ajax_url": "https:\/\/jmarcondes.com.br\/wp-admin\/admin-ajax.php", "nonce": "d8bf491cfc", "defaultAvatarSVG": "<svg width=\"48px\" height=\"48px\" class=\"nta-whatsapp-default-avatar\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\" x=\"0px\" y=\"0px\"\n            viewBox=\"0 0 512 512\" style=\"enable-background:new 0 0 512 512;\" xml:space=\"preserve\">\n            <path style=\"fill:#EDEDED;\" d=\"M0,512l35.31-128C12.359,344.276,0,300.138,0,254.234C0,114.759,114.759,0,255.117,0\n            S512,114.759,512,254.234S395.476,512,255.117,512c-44.138,0-86.51-14.124-124.469-35.31L0,512z\"\/>\n            <path style=\"fill:#55CD6C;\" d=\"M137.71,430.786l7.945,4.414c32.662,20.303,70.621,32.662,110.345,32.662\n            c115.641,0,211.862-96.221,211.862-213.628S371.641,44.138,255.117,44.138S44.138,137.71,44.138,254.234\n            c0,40.607,11.476,80.331,32.662,113.876l5.297,7.945l-20.303,74.152L137.71,430.786z\"\/>\n            <path style=\"fill:#FEFEFE;\" d=\"M187.145,135.945l-16.772-0.883c-5.297,0-10.593,1.766-14.124,5.297\n            c-7.945,7.062-21.186,20.303-24.717,37.959c-6.179,26.483,3.531,58.262,26.483,90.041s67.09,82.979,144.772,105.048\n            c24.717,7.062,44.138,2.648,60.028-7.062c12.359-7.945,20.303-20.303,22.952-33.545l2.648-12.359\n            c0.883-3.531-0.883-7.945-4.414-9.71l-55.614-25.6c-3.531-1.766-7.945-0.883-10.593,2.648l-22.069,28.248\n            c-1.766,1.766-4.414,2.648-7.062,1.766c-15.007-5.297-65.324-26.483-92.69-79.448c-0.883-2.648-0.883-5.297,0.883-7.062\n            l21.186-23.834c1.766-2.648,2.648-6.179,1.766-8.828l-25.6-57.379C193.324,138.593,190.676,135.945,187.145,135.945\"\/>\n        <\/svg>", "defaultAvatarUrl": "https:\/\/jmarcondes.com.br\/wp-content\/plugins\/wp-whatsapp\/assets\/img\/whatsapp_logo.svg", "timezone": "+00:00", "i18n": { "online": "Online", "offline": "Offline" }, "urlSettings": { "onDesktop": "api", "onMobile": "api", "openInNewTab": "ON" } };
+		/* ]]> */
+	</script>
+	<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/cache/min/1/wp-content/plugins/wp-whatsapp/assets/js/whatsapp-button_ver%3D1713195451.js"
+		id="nta-js-global-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/themes/dt-the7/js/legacy.min_ver%3D11.9.3.js"
+		id="dt-legacy-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/themes/dt-the7/lib/jquery-mousewheel/jquery-mousewheel.min_ver%3D11.9.3.js"
+		id="jquery-mousewheel-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/themes/dt-the7/lib/custom-scrollbar/custom-scrollbar.min_ver%3D11.9.3.js"
+		id="the7-custom-scrollbar-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/plugins/dt-the7-core/assets/js/post-type.min_ver%3D2.7.7.js"
+		id="the7-core-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/plugins/Ultimate_VC_Addons/assets/min-js/info-box.min_ver%3D3.19.19.js"
+		id="ultimate-vc-addons-info_box_js-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/plugins/js_composer/assets/js/dist/js_composer_front.min_ver%3D7.2.js"
+		id="wpb_composer_front_js-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/plugins/js_composer/assets/lib/vc_waypoints/vc-waypoints.min_ver%3D7.2.js"
+		id="vc_waypoints-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/plugins/js_composer/assets/lib/bower/zoom/jquery.zoom.min_ver%3D7.2.js"
+		id="zoom-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/plugins/js_composer/assets/lib/vc_image_zoom/vc_image_zoom.min_ver%3D7.2.js"
+		id="vc_image_zoom-js"></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/plugins/Ultimate_VC_Addons/assets/min-js/ultimate_bg.min_ver%3D3.19.19.js"
+		id="ultimate-vc-addons-row-bg-js"></script>
+	<script type="text/javascript" id="nta-js-popup-js-extra">
+		/* <![CDATA[ */
+		var njt_wa = { "gdprStatus": "", "accounts": [{ "accountId": 1805, "accountName": "Unidade Fazenda Rio Grande", "avatar": "", "number": "554136080048", "title": "", "predefinedText": "", "willBeBackText": "I will be back in [njwa_time_work]", "dayOffsText": "I will be back soon", "isAlwaysAvailable": "ON", "daysOfWeekWorking": { "sunday": { "isWorkingOnDay": "OFF", "workHours": [{ "startTime": "08:00", "endTime": "17:30" }] }, "monday": { "isWorkingOnDay": "OFF", "workHours": [{ "startTime": "08:00", "endTime": "17:30" }] }, "tuesday": { "isWorkingOnDay": "OFF", "workHours": [{ "startTime": "08:00", "endTime": "17:30" }] }, "wednesday": { "isWorkingOnDay": "OFF", "workHours": [{ "startTime": "08:00", "endTime": "17:30" }] }, "thursday": { "isWorkingOnDay": "OFF", "workHours": [{ "startTime": "08:00", "endTime": "17:30" }] }, "friday": { "isWorkingOnDay": "OFF", "workHours": [{ "startTime": "08:00", "endTime": "17:30" }] }, "saturday": { "isWorkingOnDay": "OFF", "workHours": [{ "startTime": "08:00", "endTime": "17:30" }] } } }, { "accountId": 1806, "accountName": "Unidade Sitio Cercado", "avatar": "", "number": "554133495598", "title": "", "predefinedText": "", "willBeBackText": "I will be back in [njwa_time_work]", "dayOffsText": "I will be back soon", "isAlwaysAvailable": "ON", "daysOfWeekWorking": { "sunday": { "isWorkingOnDay": "OFF", "workHours": [{ "startTime": "08:00", "endTime": "17:30" }] }, "monday": { "isWorkingOnDay": "OFF", "workHours": [{ "startTime": "08:00", "endTime": "17:30" }] }, "tuesday": { "isWorkingOnDay": "OFF", "workHours": [{ "startTime": "08:00", "endTime": "17:30" }] }, "wednesday": { "isWorkingOnDay": "OFF", "workHours": [{ "startTime": "08:00", "endTime": "17:30" }] }, "thursday": { "isWorkingOnDay": "OFF", "workHours": [{ "startTime": "08:00", "endTime": "17:30" }] }, "friday": { "isWorkingOnDay": "OFF", "workHours": [{ "startTime": "08:00", "endTime": "17:30" }] }, "saturday": { "isWorkingOnDay": "OFF", "workHours": [{ "startTime": "08:00", "endTime": "17:30" }] } } }], "options": { "display": { "displayCondition": "showAllPage", "includePages": [], "excludePages": [], "includePosts": [], "showOnDesktop": "ON", "showOnMobile": "ON", "time_symbols": "h:m" }, "styles": { "title": "Inicie uma conversa", "responseText": "  A equipe normalmente responde em alguns minutos.", "description": "Oi! Clique em um de nossos Canais abaixo para bater um papo no WhatsApp\r\n", "backgroundColor": "#2db742", "textColor": "#fff", "titleSize": 18, "accountNameSize": 14, "descriptionTextSize": 12, "regularTextSize": 11, "scrollHeight": "500", "isShowScroll": "OFF", "isShowResponseText": "OFF", "isShowPoweredBy": "ON", "btnLabel": "Preciso de ajuda? <strong> Converse conosco <\/strong>", "btnLabelWidth": "156", "btnPosition": "right", "btnLeftDistance": "30", "btnRightDistance": "30", "btnBottomDistance": "30", "isShowBtnLabel": "ON", "isShowGDPR": "OFF", "gdprContent": "Please accept our <a href=\"https:\/\/ninjateam.org\/privacy-policy\/\">privacy policy<\/a> first to start a conversation." }, "analytics": { "enabledGoogle": "OFF", "enabledFacebook": "OFF", "enabledGoogleGA4": "OFF" } } };
+		/* ]]> */
+	</script>
+	<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" defer="defer"
+		src="../../jmarcondes.com.br/wp-content/cache/min/1/wp-content/plugins/wp-whatsapp/assets/js/whatsapp-popup_ver%3D1713195451.js"
+		id="nta-js-popup-js"></script>
+	<script type="rocketlazyloadscript"></script>
+	<script>window.lazyLoadOptions = { elements_selector: "img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]", data_src: "lazy-src", data_srcset: "lazy-srcset", data_sizes: "lazy-sizes", class_loading: "lazyloading", class_loaded: "lazyloaded", threshold: 300, callback_loaded: function (element) { if (element.tagName === "IFRAME" && element.dataset.rocketLazyload == "fitvidscompatible") { if (element.classList.contains("lazyloaded")) { if (typeof window.jQuery != "undefined") { if (jQuery.fn.fitVids) { jQuery(element).parent().fitVids() } } } } } }; window.addEventListener('LazyLoad::Initialized', function (e) {
+			var lazyLoadInstance = e.detail.instance; if (window.MutationObserver) {
+				var observer = new MutationObserver(function (mutations) {
+					var image_count = 0; var iframe_count = 0; var rocketlazy_count = 0; mutations.forEach(function (mutation) {
+						for (var i = 0; i < mutation.addedNodes.length; i++) {
+							if (typeof mutation.addedNodes[i].getElementsByTagName !== 'function') { continue }
+							if (typeof mutation.addedNodes[i].getElementsByClassName !== 'function') { continue }
+							images = mutation.addedNodes[i].getElementsByTagName('img'); is_image = mutation.addedNodes[i].tagName == "IMG"; iframes = mutation.addedNodes[i].getElementsByTagName('iframe'); is_iframe = mutation.addedNodes[i].tagName == "IFRAME"; rocket_lazy = mutation.addedNodes[i].getElementsByClassName('rocket-lazyload'); image_count += images.length; iframe_count += iframes.length; rocketlazy_count += rocket_lazy.length; if (is_image) { image_count += 1 }
+							if (is_iframe) { iframe_count += 1 }
+						}
+					}); if (image_count > 0 || iframe_count > 0 || rocketlazy_count > 0) { lazyLoadInstance.update() }
+				}); var b = document.getElementsByTagName("body")[0]; var config = { childList: !0, subtree: !0 }; observer.observe(b, config)
+			}
+		}, !1)</script>
+	<script data-no-minify="1" async=""
+		src="../../jmarcondes.com.br/wp-content/plugins/wp-rocket/assets/js/lazyload/17.5/lazyload.min.js"></script>
+	<script>function lazyLoadThumb(e) { var t = '<img data-lazy-src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"><noscript><img src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"></noscript>', a = '<button class="play" aria-label="play Youtube video"></button>'; return t.replace("ID", e) + a } function lazyLoadYoutubeIframe() { var e = document.createElement("iframe"), t = "ID?autoplay=1"; t += 0 === this.parentNode.dataset.query.length ? '' : '&' + this.parentNode.dataset.query; e.setAttribute("src", t.replace("ID", this.parentNode.dataset.src)), e.setAttribute("frameborder", "0"), e.setAttribute("allowfullscreen", "1"), e.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"), this.parentNode.parentNode.replaceChild(e, this.parentNode) } document.addEventListener("DOMContentLoaded", function () { var e, t, p, a = document.getElementsByClassName("rll-youtube-player"); for (t = 0; t < a.length; t++)e = document.createElement("div"), e.setAttribute("data-id", a[t].dataset.id), e.setAttribute("data-query", a[t].dataset.query), e.setAttribute("data-src", a[t].dataset.src), e.innerHTML = lazyLoadThumb(a[t].dataset.id), a[t].appendChild(e), p = e.querySelector('.play'), p.onclick = lazyLoadYoutubeIframe });</script>
+	<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="pswp__bg"></div>
+		<div class="pswp__scroll-wrap">
+			<div class="pswp__container">
+				<div class="pswp__item"></div>
+				<div class="pswp__item"></div>
+				<div class="pswp__item"></div>
+			</div>
+			<div class="pswp__ui pswp__ui--hidden">
+				<div class="pswp__top-bar">
+					<div class="pswp__counter"></div>
+					<button class="pswp__button pswp__button--close" title="Close (Esc)"
+						aria-label="Close (Esc)"></button>
+					<button class="pswp__button pswp__button--share" title="Share" aria-label="Share"></button>
+					<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"
+						aria-label="Toggle fullscreen"></button>
+					<button class="pswp__button pswp__button--zoom" title="Zoom in/out"
+						aria-label="Zoom in/out"></button>
+					<div class="pswp__preloader">
+						<div class="pswp__preloader__icn">
+							<div class="pswp__preloader__cut">
+								<div class="pswp__preloader__donut"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+					<div class="pswp__share-tooltip"></div>
+				</div>
+				<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"
+					aria-label="Previous (arrow left)">
+				</button>
+				<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"
+					aria-label="Next (arrow right)">
+				</button>
+				<div class="pswp__caption">
+					<div class="pswp__caption__center"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript"
+		id="perfmatters-delayed-styles-js">!function () { const e = ["keydown", "mousemove", "wheel", "touchmove", "touchstart", "touchend"]; function t() { document.querySelectorAll("link[data-pmdelayedstyle]").forEach(function (e) { e.setAttribute("href", e.getAttribute("data-pmdelayedstyle")) }), e.forEach(function (e) { window.removeEventListener(e, t, { passive: !0 }) }) } e.forEach(function (e) { window.addEventListener(e, t, { passive: !0 }) }) }();</script>
+
+
+</body>
+
+</html>
+->
